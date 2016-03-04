@@ -13,7 +13,7 @@ https://github.com/turtlebot/turtlebot/tree/indigo/turtlebot_teleop
   
   <!--  smooths inputs from cmd_vel_mux/input/teleop_raw to cmd_vel_mux/input/teleop -->
   <include 
-    file="$(find runners_bringup)/launch/includes/velocity_smoother.launch.xml"
+    file="$(find tobor)/launch/includes/velocity_smoother.launch.xml"
   /> <!-- End include -->
 
   <node 

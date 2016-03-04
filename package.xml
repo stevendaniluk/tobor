@@ -40,7 +40,6 @@
   <run_depend>robot_pose_ekf</run_depend>
   <run_depend>robot_state_publisher</run_depend>
   <run_depend>roscpp</run_depend>
-  <run_depend>runners_bringup</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <run_depend>stage_ros</run_depend>
   <run_depend>tf</run_depend>
