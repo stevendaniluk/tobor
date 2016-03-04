@@ -1,0 +1,13 @@
+<!-- Open RVIZ for navigation  -->
+
+<launch>
+  
+  <!-- Start RVIZ -->
+  <node 
+    name="rviz" 
+    pkg="rviz" 
+    type="rviz" 
+    args="-d $(find tobor)/rviz/rviz/navigation.rviz"
+  />
+  
+</launch>

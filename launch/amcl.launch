@@ -1,0 +1,31 @@
+<!-- AMCL Test -->
+
+<launch>
+
+  <!-- Map server -->
+  <arg name="map_name" default="utias.yaml"/>
+  <node 
+    name="map_server" 
+    pkg="map_server" 
+    type="map_server" 
+    args="$(find tobor)/maps/$(arg map_name)"
+  />
+  
+  <!-- Set initial position -->
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_a" default="0.0"/>
+  
+  <!-- Start AMCL -->
+  <include file="$(find tobor)/launch/includes/amcl.launch.xml">
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+  </include>
+  
+  <!-- Start move_base -->
+  <include file="$(find tobor)/launch/includes/move_base.launch.xml">
+  </include>
+
+</launch>
+
