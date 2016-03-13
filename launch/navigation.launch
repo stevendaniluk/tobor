@@ -1,4 +1,12 @@
-<!-- AMCL Test -->
+<!-- 
+
+  Launch file for Tobor navigation 
+
+  Coordinates for initial poses:
+    Entrance: x=4.0, y=57.8, a=0.0
+    Barfoots Door: x=101.0, y=10.5, a=0.0
+
+-->
 
 <launch>
 
