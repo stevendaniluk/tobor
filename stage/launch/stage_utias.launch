@@ -1,6 +1,10 @@
 <!-- 
   Simple Stage simulation for testing
   
+  Coordinates for initial poses:
+    Entrance: x=4.0, y=57.8, a=0.0
+    Barfoots Door: x=101.0, y=10.5, a=0.0
+  
 -->
 <launch>
   
@@ -8,8 +12,8 @@
   <arg name="map_name"       default="utias.yaml"/>
   <arg name="world_name"     default="utias.world"/>
   
-  <arg name="initial_pose_x" default="2.0"/>
-  <arg name="initial_pose_y" default="2.0"/>
+  <arg name="initial_pose_x" default="4.0"/>
+  <arg name="initial_pose_y" default="57.8"/>
   <arg name="initial_pose_a" default="0.0"/>
 
   <param name="/use_sim_time" value="true"/>
@@ -38,10 +42,7 @@
     pkg="stage_ros" 
     type="stageros" 
     name="stageros"
-    args="$(find tobor)/stage/worlds/$(arg world_name)">
-    <!--
     args="-g $(find tobor)/stage/worlds/$(arg world_name)">
-    -->
       <param name="base_watchdog_timeout" value="0.5"/>
       <remap from="odom" to="odom"/>
       <remap from="base_pose_ground_truth" to="base_pose_ground_truth"/>
@@ -105,13 +106,11 @@
   </node>
   
   <!-- AMCL -->
-  <!--
   <include file="$(find tobor)/launch/includes/amcl.launch.xml">
     <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
     <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
     <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
   </include>
-  -->
   
 </launch>
 
