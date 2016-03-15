@@ -1,0 +1,48 @@
+<!-- Launch file for Turtlebot -->
+
+<launch>
+  <!-- Parameters -->
+  <arg name="base"              default="kobuki" />
+  <arg name="stacks"            default="hexagons" />
+  <arg name="3d_sensor"         default="kinect" />
+  <arg name="simulation"        default="false"/>
+  <!-- Uncomment if using ROS Indigo
+  <arg name="serialport"        default="$(env TURTLEBOT_SERIAL_PORT)"/>
+  -->
+  <!-- Load URDF -->
+  <include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
+    <arg name="base" value="$(arg base)" />
+    <arg name="stacks" value="$(arg stacks)" />
+    <arg name="3d_sensor" value="$(arg 3d_sensor)" />
+  </include>
+
+  <!-- Launch base -->
+  <include file="$(find turtlebot_bringup)/launch/includes/mobile_base.launch.xml">
+    <arg name="base" value="$(arg base)" />
+    <!-- Uncomment if using ROS Indigo
+    <arg name="serialport" value="$(arg serialport)" />
+    -->
+  </include>
+
+  <!-- Launch sensor -->
+  <include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+    <arg name="rgb_processing" value="false" />
+    <arg name="depth_registration" value="false" />
+    <arg name="depth_processing" value="false" />
+    <arg name="scan_topic" value="/scan" />
+    <arg name="3d_sensor" value="kinect"/>
+  </include>
+  
+  <!-- Safety controller -->
+  <node 
+    pkg="nodelet" 
+    type="nodelet" 
+    name="kobuki_safety_controller" 
+    args="load kobuki_safety_controller/SafetyControllerNodelet /mobile_base_nodelet_manager">
+    <remap from="kobuki_safety_controller/cmd_vel" to="/cmd_vel_mux/input/safety_controller"/>
+    <remap from="kobuki_safety_controller/events/bumper" to="/mobile_base/events/bumper"/>
+    <remap from="kobuki_safety_controller/events/cliff" to="/mobile_base/events/cliff"/>
+    <remap from="kobuki_safety_controller/events/wheel_drop" to="/mobile_base/events/wheel_drop"/>
+  </node>
+
+</launch>

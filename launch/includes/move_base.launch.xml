@@ -1,9 +1,8 @@
 <!-- 
-    ROS navigation stack with velocity smoother and safety (reactive) controller
+    ROS navigation stack with velocity smoother
 -->
 <launch>
   <include file="$(find tobor)/launch/includes/velocity_smoother.launch.xml"/>
-  <include file="$(find tobor)/launch/includes/safety_controller.launch.xml"/>
   
   <arg name="odom_frame_id"   default="odom"/>
   <arg name="base_frame_id"   default="base_footprint"/>
