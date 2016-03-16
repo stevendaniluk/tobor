@@ -31,7 +31,7 @@ floorplan
 (
   name "maze"
   bitmap "../../maps/utias.png"
-  size [ 114 62.4 2.0 ]
+  size [ 111 62.4 2.0 ]
   pose [ 57 31.2 0.0 0.0 ]
 )
 
