@@ -1,6 +1,6 @@
 image: utias.png
-resolution: 0.10
-origin: [0.0, 0.0, 0.0]
+resolution: 0.1046025
+origin: [-63.5, -35.0, 0.0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196

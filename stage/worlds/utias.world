@@ -29,16 +29,16 @@ window
 
 floorplan
 (
-  name "maze"
+  name "utias"
   bitmap "../../maps/utias.png"
-  size [ 106 62.4 2.0 ]
-  pose [ 57 31.2 0.0 0.0 ]
+  size [ 117.20 65.20 2.0 ]
+  pose [ -4.23 -2.3 0.0 0.0 ]
 )
 
 # throw in a robot
 turtlebot
 (
-  pose [ 60.9 12.0 0.0 0.0 ]
+  pose [ 0.0 0.0 0.0 -90 ]
   name "tobor"
-  color "black"
+  color "red"
 )
