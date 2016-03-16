@@ -15,5 +15,5 @@ GlobalPlanner:
   planner_window_y: 0.0                     # default 0.0
   lethal_cost: 253                          # default 253
   neutral_cost: 50                          # default 50
-  cost_factor: 3.0                          # Factor to multiply cost from costmap
+  cost_factor: 0.8                          # Factor to multiply cost from costmap
   

@@ -24,7 +24,7 @@ base_local_planner: "dwa_local_planner/DWAPlannerROS"
 # dwa_local_planner/DWAPlannerROS
 # base_local_planner (Not sure about plugin name)
 
-base_global_planner: "navfn/NavfnROS"
+base_global_planner: "global_planner/GlobalPlanner"
 
 ## Global Planner Options:
 # global_planner/GlobalPlanner
