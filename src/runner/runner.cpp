@@ -4,21 +4,34 @@
 
 //---------------------------------------------------------------------------
 
-Runner::Runner() : move_base_ac("move_base", true), docking_ac("dock_drive_action", true) {
+Runner::Runner() : nav_state(actionlib::SimpleClientGoalState::LOST, "test"), 
+                   docking_state(actionlib::SimpleClientGoalState::LOST, "test"),
+                   move_base_ac("move_base", true), 
+                   docking_ac("dock_drive_action", true) {
 
   // Subscribe to pose
   pose_sub = nh.subscribe("amcl_pose", 100, &Runner::amcl_pose_callback, this);
   
-  // Wait for action server
-  while(!move_base_ac.waitForServer(ros::Duration(5.0))) {
-    ROS_INFO("Waiting for action servers to come up");
+  // Wait for action servers (do individually in case docking is not used)
+  ROS_INFO("Waiting for action servers to come up");
+  int loop_counter=0;
+  
+  while(!move_base_ac.waitForServer(ros::Duration(1.0))) {
+    if (loop_counter >= 3) {
+      ROS_INFO("The move_base action server did not successfully come up");
+      break;
+    }// end if
+    loop_counter++;
   }// end while
-  /*
-  while(!move_base_ac.waitForServer(ros::Duration(5.0)) || 
-        !docking_ac.waitForServer(ros::Duration(5.0))) {
-    ROS_INFO("Waiting for action servers to come up");
+  
+  loop_counter=0;
+  while(!docking_ac.waitForServer(ros::Duration(1.0))) {
+    if (loop_counter >= 3) {
+      ROS_INFO("The docking action server did not successfully come up");
+      break;
+    }// end if
+    loop_counter++;
   }// end while
-  */
   
   // Get current pose
   getPose();
@@ -73,14 +86,7 @@ void Runner::amcl_pose_callback(const geometry_msgs::PoseWithCovarianceStamped &
 
 //-----------------------------------------
 
-// Spinner
-void Runner::spin() {
-  ros::spinOnce();
-}// end spin
-
-//-----------------------------------------
-
-// Show pose
+// Get pose
 void Runner::getPose() {
   ros::spinOnce();
 }// end showPose
@@ -91,9 +97,6 @@ void Runner::getPose() {
 void Runner::setStartPose() {
   ros::spinOnce();
   start_pose=pose;
-  
-  //ROS_INFO("Start pose is now: x=%.2f, y=%.2f, theta=%.2f\n", start_pose.pose.pose.position.x,
-  //        start_pose.pose.pose.position.y, start_pose.pose.pose.orientation.z);
 }// end showPose
 
 //-----------------------------------------

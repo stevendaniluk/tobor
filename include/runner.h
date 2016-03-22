@@ -21,14 +21,14 @@ class Runner {
     
     // Goal details
     move_base_msgs::MoveBaseGoal current_goal;
-    actionlib::SimpleClientGoalState nav_state = actionlib::SimpleClientGoalState::LOST;
+    actionlib::SimpleClientGoalState nav_state;
     
     // Pose details
     geometry_msgs::PoseWithCovarianceStamped pose;
     geometry_msgs::PoseWithCovarianceStamped start_pose;
     
     // Docking details
-    actionlib::SimpleClientGoalState docking_state = actionlib::SimpleClientGoalState::LOST;
+    actionlib::SimpleClientGoalState docking_state;
     bool docked;
 
     //-----------------------------------------
@@ -41,9 +41,6 @@ class Runner {
     
     // Send a goal
     void sendGoal(move_base_msgs::MoveBaseGoal &goal);
-    
-    // Spinner
-    void spin();
     
     // Get pose
     void getPose();
