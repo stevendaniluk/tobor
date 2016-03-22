@@ -30,7 +30,9 @@
     <arg name="depth_registration" value="false" />
     <arg name="depth_processing" value="false" />
     <arg name="scan_topic" value="/scan" />
+    <!-- Uncomment if using ROS Indigo
     <arg name="3d_sensor" value="kinect"/>
+    -->
   </include>
   
   <!-- Safety controller -->
