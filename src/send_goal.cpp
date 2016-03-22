@@ -8,7 +8,7 @@
 
 int main(int argc, char** argv){
   
-  ros::init(argc, argv, "class_test");
+  ros::init(argc, argv, "tobor_test");
   
   // Check input arguments
   if (argc != 4 && argc!=5) {
@@ -17,21 +17,34 @@ int main(int argc, char** argv){
   }// end if
   
   // Create Runner object
-  Runner tobor;
+  Runner Tobor;
+  
+  // Display current pose, and set start pose
+  Tobor.setStartPose();
   
   // Assign input arguments to goal object
-  tobor.setCurrentGoal(atof(argv[1]), atof(argv[2]), atof(argv[3]));
-  
-  // Assign goal frame, if frame argument is given
+  Tobor.setCurrentGoal(atof(argv[1]), atof(argv[2]), atof(argv[3]));
   if (argc == 5) {
-    tobor.current_goal.target_pose.header.frame_id = argv[4];
+    Tobor.current_goal.target_pose.header.frame_id = argv[4];
   }// end if
   
-  // Send a goal
-  tobor.sendGoal(tobor.current_goal);
+  // Send the goal
+  Tobor.sendGoal(Tobor.current_goal);
   
-  tobor.showPose();
+  ros::Duration(1.0).sleep();
   
+  // If successful, return to start
+  if (Tobor.nav_state == actionlib::SimpleClientGoalState::SUCCEEDED) {
+    ROS_INFO("Returning to start position.");
+    Tobor.setCurrentGoal(Tobor.start_pose.pose.pose.position.x, 
+                         Tobor.start_pose.pose.pose.position.y, 
+                         Tobor.start_pose.pose.pose.orientation.z);
+    Tobor.sendGoal(Tobor.current_goal);
+  }else {
+    ROS_INFO("Did not Succeed.");
+  }// end if (goal)
+  
+
   return 0;
 }
 
