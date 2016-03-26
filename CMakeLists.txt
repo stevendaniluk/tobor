@@ -27,9 +27,11 @@ include_directories(
 
 # Declare C++ executables
 add_executable(send_goal src/send_goal.cpp)
+add_executable(go_and_return src/go_and_return.cpp)
 
 # Specify link libraries
 target_link_libraries(send_goal ${catkin_LIBRARIES} tobor)
+target_link_libraries(go_and_return ${catkin_LIBRARIES} tobor)
 
 # Declare a C++ library
 add_library(tobor src/runner/runner.cpp)
