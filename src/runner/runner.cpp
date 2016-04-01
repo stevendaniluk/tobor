@@ -44,7 +44,7 @@ Runner::Runner() : nav_state(actionlib::SimpleClientGoalState::LOST, "test"),
 void Runner::setCurrentGoal(float x_in, float y_in, float theta_in) {
   current_goal.target_pose.pose.position.x=x_in;
   current_goal.target_pose.pose.position.y=y_in;
-  current_goal.target_pose.pose.orientation.z=theta_in*(3.14159265/180);
+  current_goal.target_pose.pose.orientation.z=theta_in;
   current_goal.target_pose.pose.orientation.w = 1.0;
   current_goal.target_pose.header.frame_id = "map";
 }// end setCurrentGoal
