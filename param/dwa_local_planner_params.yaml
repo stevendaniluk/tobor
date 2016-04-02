@@ -20,8 +20,8 @@ DWAPlannerROS:
   acc_lim_y: 0.0                 # Zero since diff drive robot
 
 # Goal Tolerance Parameters
-  yaw_goal_tolerance: 0.05
-  xy_goal_tolerance: 0.10        
+  yaw_goal_tolerance: 0.10
+  xy_goal_tolerance: 0.15        
   latch_xy_goal_tolerance: false
 
 # Forward Simulation Parameters

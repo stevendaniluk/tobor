@@ -13,7 +13,7 @@ robot_radius: 0.2
 
 obstacle_layer:
   enabled:              true
-  obstacle_range: 3.0
+  obstacle_range: 5.0
   raytrace_range: 5.0
   #track_unknown_space:  true    #needed for disabling path planning through unknown space
 
