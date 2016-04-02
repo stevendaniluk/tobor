@@ -79,6 +79,29 @@ void Runner::sendGoal(move_base_msgs::MoveBaseGoal &goal) {
 
 //-----------------------------------------
 
+// Send a temporary goal
+void Runner::sendTempGoal(move_base_msgs::MoveBaseGoal &goal) {
+
+  // Timestamp
+  goal.target_pose.header.stamp = ros::Time::now();
+  
+  // Send the goal
+  move_base_ac.sendGoal(goal);
+  
+  // Update the state
+  nav_state = move_base_ac.getState();
+  
+}// end sendGoal
+
+//-----------------------------------------
+
+// Update nav_state
+void Runner::updateNavState() {
+  nav_state = move_base_ac.getState();
+}// end sendGoal
+
+//-----------------------------------------
+
 // Callback for pose subscriber
 void Runner::amcl_pose_callback(const geometry_msgs::PoseWithCovarianceStamped & pose_cb){
   pose=pose_cb;
