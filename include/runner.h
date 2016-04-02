@@ -42,9 +42,6 @@ class Runner {
     // Send a goal
     void sendGoal(move_base_msgs::MoveBaseGoal &goal);
     
-    // Send a temporary goal
-    void sendTempGoal(move_base_msgs::MoveBaseGoal &goal);
-    
     // Get pose
     void getPose();
     
@@ -53,9 +50,6 @@ class Runner {
     
     // Start docking
     void dock();
-    
-    // Update nav_state
-    void updateNavState();
     
   private:
   
