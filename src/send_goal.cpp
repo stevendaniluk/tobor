@@ -23,7 +23,7 @@ int main(int argc, char** argv){
   Tobor.setStartPose();
   
   // Assign input arguments to goal object
-  Tobor.setCurrentGoal(atof(argv[1]), atof(argv[2]), atof(argv[3]));
+  Tobor.setCurrentGoal(atof(argv[1]), atof(argv[2]), atof(argv[3]), 1.0);
   
   // Send the goal
   Tobor.sendGoal(Tobor.current_goal);

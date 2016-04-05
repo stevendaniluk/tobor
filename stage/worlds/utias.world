@@ -30,15 +30,15 @@ window
 floorplan
 (
   name "utias"
-  bitmap "../../maps/utias.png"
-  size [ 117.20 65.20 2.0 ]
-  pose [ -4.23 -2.3 0.0 0.0 ]
+  bitmap "../../maps/utias_highres.png"
+  size [ 117.90 65.20 2.0 ]
+  pose [ -3.6 -2.3 0.0 0.0 ]
 )
 
 # throw in a robot
 turtlebot
 (
-  pose [ 0.0 0.0 0.0 -90 ]
+  pose [ -45.0 25.5 0.0 0.0 ]
   name "tobor"
   color "red"
 )

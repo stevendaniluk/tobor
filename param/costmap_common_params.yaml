@@ -7,18 +7,16 @@
 
 robot_radius: 0.2
 
-# map_type: voxel
-
 # --------------------------------
 
 obstacle_layer:
   enabled:              true
-  obstacle_range: 5.0
+  obstacle_range: 3.0
   raytrace_range: 5.0
   #track_unknown_space:  true    #needed for disabling path planning through unknown space
 
-  observation_sources:  rplidar
-  rplidar:
+  observation_sources:  scan
+  scan:
     data_type: LaserScan
     topic: scan
     marking: true
@@ -30,15 +28,15 @@ obstacle_layer:
 
 local_inflation_layer:
   enabled:              true
-  cost_scaling_factor:  2.5   # exponential rate at which the obstacle cost drops off 
-  inflation_radius:     2.00  # max. distance  which costs are incurred for planning
+  cost_scaling_factor:  5.55  # exponential rate at which the obstacle cost drops off 
+  inflation_radius:     0.80  # max. distance  which costs are incurred for planning
 
 # --------------------------------
 
 global_inflation_layer:
   enabled:              true
-  cost_scaling_factor:  2.5   # exponential rate at which the obstacle cost drops off 
-  inflation_radius:     2.00  # max. distance  which costs are incurred for planning
+  cost_scaling_factor:  9.2   # exponential rate at which the obstacle cost drops off 
+  inflation_radius:     0.40  # max. distance  which costs are incurred for planning
 
 # --------------------------------
 

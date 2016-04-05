@@ -12,6 +12,9 @@ Runner::Runner() : nav_state(actionlib::SimpleClientGoalState::LOST, "test"),
   // Subscribe to pose
   pose_sub = nh.subscribe("amcl_pose", 100, &Runner::amcl_pose_callback, this);
   
+  // Subscribe to odom
+  odom_sub = nh.subscribe("odom", 100, &Runner::odom_pose_callback, this);
+  
   // Wait for action servers (do individually in case docking is not used)
   ROS_INFO("Waiting for action servers to come up");
   int loop_counter=0;
@@ -33,19 +36,19 @@ Runner::Runner() : nav_state(actionlib::SimpleClientGoalState::LOST, "test"),
     loop_counter++;
   }// end while
   
-  // Get current pose
-  getPose();
+  // Update
+  update();
   
 }// end constructor
 
 //-----------------------------------------
 
 // Assign a goal
-void Runner::setCurrentGoal(float x_in, float y_in, float theta_in) {
+void Runner::setCurrentGoal(float x_in, float y_in, float theta_in, float w_in) {
   current_goal.target_pose.pose.position.x=x_in;
   current_goal.target_pose.pose.position.y=y_in;
   current_goal.target_pose.pose.orientation.z=theta_in;
-  current_goal.target_pose.pose.orientation.w = 1.0;
+  current_goal.target_pose.pose.orientation.w = w_in;
   current_goal.target_pose.header.frame_id = "map";
 }// end setCurrentGoal
 
@@ -109,8 +112,15 @@ void Runner::amcl_pose_callback(const geometry_msgs::PoseWithCovarianceStamped &
 
 //-----------------------------------------
 
-// Get pose
-void Runner::getPose() {
+// Callback for odom subscriber
+void Runner::odom_pose_callback(const nav_msgs::Odometry & odom_cb){
+  odom=odom_cb;
+}// end pose callback
+
+//-----------------------------------------
+
+// Update the callbacks
+void Runner::update() {
   ros::spinOnce();
 }// end showPose
 

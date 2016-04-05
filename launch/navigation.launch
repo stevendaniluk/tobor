@@ -3,7 +3,7 @@
   Launch file for Tobor navigation 
 
   Coordinates for initial poses:
-    Entrance: x=4.0, y=57.8, a=0.0
+    Entrance: x=-45.0, y=25.5, a=0.0
     Barfoots Door: x=101.0, y=10.5, a=0.0
 
 -->
@@ -20,8 +20,8 @@
   />
   
   <!-- Set initial position -->
-  <arg name="initial_pose_x" default="0.0"/>
-  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_x" default="-45.0"/>
+  <arg name="initial_pose_y" default="25.5"/>
   <arg name="initial_pose_a" default="0.0"/>
   
   <!-- Start AMCL -->

@@ -23,7 +23,7 @@ int main(int argc, char** argv){
   Tobor.setStartPose();
   
   // Assign input arguments to goal object
-  Tobor.setCurrentGoal(atof(argv[1]), atof(argv[2]), atof(argv[3]));
+  Tobor.setCurrentGoal(atof(argv[1]), atof(argv[2]), atof(argv[3]), 1.0);
   if (argc == 5) {
     Tobor.current_goal.target_pose.header.frame_id = argv[4];
   }// end if
@@ -38,7 +38,7 @@ int main(int argc, char** argv){
     ROS_INFO("Returning to start position.");
     Tobor.setCurrentGoal(Tobor.start_pose.pose.pose.position.x, 
                          Tobor.start_pose.pose.pose.position.y, 
-                         Tobor.start_pose.pose.pose.orientation.z);
+                         Tobor.start_pose.pose.pose.orientation.z, 1.0);
     Tobor.sendGoal(Tobor.current_goal);
   }else {
     ROS_INFO("Did not Succeed.");
