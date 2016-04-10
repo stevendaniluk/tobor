@@ -79,15 +79,16 @@ int main(int argc, char** argv){
   geometry_msgs::Twist back_up;
   int failed_attempts = 0;
   int goal = 0; // Current goal number
+  double goal_tol;
   
   // Tuning parameters
   double back_up_dist = 1.0;  // Recovery backup distance
   back_up.linear.x=-0.25;     // Recovery backup speed
-  double goal_tol = 1.50;     // Goal tolerance, within which next goal is sent [m]
-  
+  const double large_tol = 1.50;   // Large goal tolerance [m]
+  const double small_tol = 0.2;   // Large goal tolerance [m]
+  int door_goal = 22;	      // Goal in front of door
   
   //---------------------------------
-  
   
   // Check input arguments for starting goal number
   if (argc == 2) {
@@ -166,19 +167,30 @@ int main(int argc, char** argv){
       y_diff = std::abs(Tobor.pose.pose.pose.position.y - 
                         Tobor.current_goal.target_pose.pose.position.y);
       
-      // If we are within the last 3 goals (Barfoot's office), lower tolerance
-      if (goal >= num_goals - 4){
-        goal_tol = 0.2;
+      // If we are within the last 3 goals (Barfoot's office), or at the doors,
+      // lower the goal tolerance
+      if (goal >= num_goals - 4 || goal == door_goal - 1){
+        goal_tol = small_tol;
+      }else {
+        goal_tol = large_tol;
       }// end if
       
       // Check if goal criteria has been satisfied
       // If this is the last goal point, only break when SUCCEEDED
-      if ((x_diff < goal_tol) && (y_diff < goal_tol) && goal < (num_goals - 1)) {
+      if ((x_diff < goal_tol) && (y_diff < goal_tol) && 
+          goal < (num_goals - 1) && goal != (door_goal - 1)) {
         ROS_INFO("Position within goal tolerance.");
         // Reset failed attempts
         failed_attempts = 0;
         break;
-      }else if(Tobor.nav_state == actionlib::SimpleClientGoalState::SUCCEEDED){
+      }else if((goal == door_goal - 1) && 
+               Tobor.nav_state == actionlib::SimpleClientGoalState::SUCCEEDED) {
+        ROS_INFO("Position within goal tolerance.");
+        ROS_INFO("At door, will clear costmap and pause.");
+        Tobor.clearCostmap();
+        ros::Duration(1.0).sleep();
+        break;
+      }else if(Tobor.nav_state == actionlib::SimpleClientGoalState::SUCCEEDED) {
         ROS_INFO("Goal reached successfully.");
         break;
       }// end if
