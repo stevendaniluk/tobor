@@ -124,6 +124,7 @@ int main(int argc, char** argv){
         if (failed_attempts == 1) {
           // Wait 3 seconds
           ros::Duration(3.0).sleep();
+          Tobor.clearCostmap();
         }else if (failed_attempts == 2) {
           // Send commands to backup
           ROS_INFO("Backing up %.2f m", back_up_dist);
@@ -135,6 +136,7 @@ int main(int argc, char** argv){
             cmd_vel_pub.publish(back_up);
             loop_rate.sleep();
           }// end while
+          Tobor.clearCostmap();
         }else {
           // Wait 1 second
           ros::Duration(1.0).sleep();
@@ -149,6 +151,7 @@ int main(int argc, char** argv){
             cmd_vel_pub.publish(back_up);
             loop_rate.sleep();
           }// end while
+          Tobor.clearCostmap();
         }// end failed_attempts if
         
         // Move goal index back one to retry

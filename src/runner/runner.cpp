@@ -15,6 +15,9 @@ Runner::Runner() : nav_state(actionlib::SimpleClientGoalState::LOST, "test"),
   // Subscribe to odom
   odom_sub = nh.subscribe("odom", 100, &Runner::odom_pose_callback, this);
   
+  // Initialize costmap client
+  costmap_client = nh.serviceClient<std_srvs::Empty>("/move_base/clear_costmaps");
+  
   // Wait for action servers (do individually in case docking is not used)
   ROS_INFO("Waiting for action servers to come up");
   int loop_counter=0;
@@ -155,4 +158,17 @@ void Runner::dock() {
     }// end if
   }// end while
 }// end dock
+
+//-----------------------------------------
+
+// Clear costmap
+void Runner::clearCostmap() {
+  
+  bool success = costmap_client.call(costmap_srv);
+  if (success) {
+    ROS_INFO("Costmap cleared.");
+  }else {
+    ROS_INFO("Clearing costmap failed.");
+  }// end if
+}
 

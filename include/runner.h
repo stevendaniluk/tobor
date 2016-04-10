@@ -10,6 +10,7 @@
 #include <nav_msgs/Odometry.h>
 #include <kobuki_msgs/AutoDockingAction.h>
 #include <kobuki_msgs/AutoDockingGoal.h>
+#include <std_srvs/Empty.h>
 
 //---------------------------------------------------------------------------
 
@@ -62,6 +63,9 @@ class Runner {
     // Update nav_state
     void updateNavState();
     
+    // Clear costmap
+    void clearCostmap();
+    
   private:
   
     // Create nodehandle(s)
@@ -74,6 +78,10 @@ class Runner {
     // Create action clients
     actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> move_base_ac;
     actionlib::SimpleActionClient<kobuki_msgs::AutoDockingAction> docking_ac;
+    
+    // Create service clients
+    ros::ServiceClient costmap_client;
+    std_srvs::Empty costmap_srv;
     
     // Subscribers
     ros::Subscriber pose_sub;

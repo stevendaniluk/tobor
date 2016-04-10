@@ -23,6 +23,7 @@ obstacle_layer:
     clearing: true
     observation_persistence: 0.0
     expected_update_rate: 0.5
+    inf_is_valid: true
 
 # --------------------------------
 
