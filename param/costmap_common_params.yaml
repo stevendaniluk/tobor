@@ -11,7 +11,7 @@ robot_radius: 0.2
 
 obstacle_layer:
   enabled:              true
-  obstacle_range: 3.0
+  obstacle_range: 4.0
   raytrace_range: 5.0
   #track_unknown_space:  true    #needed for disabling path planning through unknown space
 
@@ -28,15 +28,15 @@ obstacle_layer:
 
 local_inflation_layer:
   enabled:              true
-  cost_scaling_factor:  5.55  # exponential rate at which the obstacle cost drops off 
-  inflation_radius:     0.80  # max. distance  which costs are incurred for planning
+  cost_scaling_factor:  7.90  # exponential rate at which the obstacle cost drops off 
+  inflation_radius:     0.50  # max. distance  which costs are incurred for planning
 
 # --------------------------------
 
 global_inflation_layer:
   enabled:              true
-  cost_scaling_factor:  9.2   # exponential rate at which the obstacle cost drops off 
-  inflation_radius:     0.40  # max. distance  which costs are incurred for planning
+  cost_scaling_factor:  11.1   # exponential rate at which the obstacle cost drops off 
+  inflation_radius:     0.30   # max. distance  which costs are incurred for planning
 
 # --------------------------------
 

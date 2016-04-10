@@ -2,7 +2,7 @@
   Simple Stage simulation for testing
   
   Coordinates for initial poses:
-    Entrance: x=-45.0, y=25.5, a=0.0
+    Entrance: x=-45.8, y=25.4, a=0.0
     Barfoots Door: x=101.0, y=10.5, a=0.00
     
     **Initial coordinates must be set here, as well as in utias.world**
@@ -15,8 +15,8 @@
   <arg name="map_name"       default="utias_highres.yaml"/>
   <arg name="world_name"     default="utias.world"/>
   
-  <arg name="initial_pose_x" default="-45.0"/>
-  <arg name="initial_pose_y" default="25.5"/>
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
   <arg name="initial_pose_a" default="0.0"/>
 
   <param name="/use_sim_time" value="true"/>

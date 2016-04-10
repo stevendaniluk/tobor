@@ -85,20 +85,13 @@ int main(int argc, char** argv){
   back_up.linear.x=-0.25;     // Recovery backup speed
   double goal_tol = 1.50;     // Goal tolerance, within which next goal is sent [m]
   
-  // Check inputs for goal_tol value
-  if (argc == 2) {
-    goal_tol = atof(argv[1]);
-  }else if (argc > 2) {
-    ROS_INFO("Usage: Input arguments [goal_tol]");
-    return 1;
-  }// end if
   
   //---------------------------------
   
   
   // Check input arguments for starting goal number
   if (argc == 2) {
-    goal = atoi(argv[1]);
+    goal = atoi(argv[1])-1;
   }// end if
   
   ROS_INFO("Beginning navigation.");
@@ -163,12 +156,17 @@ int main(int argc, char** argv){
         
         break;
       }// end ABORTED if
-
+      
       // Check current pose
       x_diff = std::abs(Tobor.pose.pose.pose.position.x - 
                         Tobor.current_goal.target_pose.pose.position.x);
       y_diff = std::abs(Tobor.pose.pose.pose.position.y - 
                         Tobor.current_goal.target_pose.pose.position.y);
+      
+      // If we are within the last 3 goals (Barfoot's office), lower tolerance
+      if (goal >= num_goals - 4){
+        goal_tol = 0.2;
+      }// end if
       
       // Check if goal criteria has been satisfied
       // If this is the last goal point, only break when SUCCEEDED
