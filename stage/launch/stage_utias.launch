@@ -2,7 +2,7 @@
   Simple Stage simulation for testing
   
   Coordinates for initial poses:
-    Entrance: x=-45.8, y=25.4, a=0.0
+    Entrance: x=-45.8, y=25.25, a=0.0
     Barfoots Door: x=101.0, y=10.5, a=0.00
     
     **Initial coordinates must be set here, as well as in utias.world**
