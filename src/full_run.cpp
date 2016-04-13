@@ -80,13 +80,14 @@ int main(int argc, char** argv){
   int failed_attempts = 0;
   int goal = 0; // Current goal number
   double goal_tol;
+  bool docked = false;
   
   // Tuning parameters
   double back_up_dist = 1.0;  // Recovery backup distance
   back_up.linear.x=-0.25;     // Recovery backup speed
   const double large_tol = 1.50;   // Large goal tolerance [m]
   const double small_tol = 0.2;   // Large goal tolerance [m]
-  int door_goal = 22;	      // Goal in front of door
+  int door_goal = 23;	      // Goal in front of door
   
   //---------------------------------
   
@@ -200,15 +201,26 @@ int main(int argc, char** argv){
 
     }// end while
   }// end for
+  ROS_INFO("Navigation Complete.");
   
-  // Ask if it should dock
-  std::cout << "Do you want to dock? ";
-  std::string response;
-  std::cin >> response;
-  if(response == "Yes" || response == "yes") {
-    // Begin docking
+  // Begin docking
+  int dock_counter = 0;
+  while (docked == false) {
+    // Activate docking
     Tobor.dock();
-  }// end docking if
+      
+    // Check status
+    if(Tobor.docking_state == actionlib::SimpleClientGoalState::SUCCEEDED) {
+      docked == true;
+      break;
+    }else {
+      dock_counter++;
+      if (dock_counter >= 3) {
+        ROS_INFO("Docking failed three times. Aborting.");
+        break;
+      }// end if 
+    }// end if   
+  }// end while
   
   return 0;
 }

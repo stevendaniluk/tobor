@@ -157,6 +157,7 @@ void Runner::dock() {
       break;
     }// end if
   }// end while
+  docking_state = docking_ac.getState();
 }// end dock
 
 //-----------------------------------------
